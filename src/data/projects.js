@@ -129,6 +129,9 @@ export const projects = [
             "HTML5",
             "CSS3",
             "JavaScript ES6",
+            "Vercel",
+            "Git",
+            "GitHub",
             
         ],
     }
