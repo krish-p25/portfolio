@@ -47,8 +47,7 @@ export default function Layout() {
             <header className="relative z-20 border-b border-white/10 bg-black/20 backdrop-blur">
                 <Container className="flex h-16 items-center justify-between">
                     <NavLink to="/" className="font-semibold tracking-tight">
-                        <span className="text-white">YourName</span>
-                        <span className="text-white/50">.dev</span>
+                        <span className="text-white">Krish Patel</span>
                     </NavLink>
 
                     <nav className="hidden items-center gap-6 sm:flex">
