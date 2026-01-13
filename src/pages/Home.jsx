@@ -29,12 +29,13 @@ function Stat({ value, label, delay = 0 }) {
     const duration = 2; // seconds
     
     useEffect(() => {
-        const startTime = Date.now() + delay * 1000;
+        const startTime = performance.now() + delay * 1000;
+        let animationFrameId;
         
-        const animate = () => {
-            const elapsed = (Date.now() - startTime) / 1000;
+        const animate = (currentTime) => {
+            const elapsed = (currentTime - startTime) / 1000;
             if (elapsed < 0) {
-                requestAnimationFrame(animate);
+                animationFrameId = requestAnimationFrame(animate);
                 return;
             }
             
@@ -46,20 +47,27 @@ function Stat({ value, label, delay = 0 }) {
             setDisplayValue(current);
             
             if (progress < 1) {
-                requestAnimationFrame(animate);
+                animationFrameId = requestAnimationFrame(animate);
             } else {
                 setDisplayValue(numericValue);
             }
         };
         
-        requestAnimationFrame(animate);
-    }, [numericValue, delay]);
+        animationFrameId = requestAnimationFrame(animate);
+        
+        return () => {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+        };
+    }, [numericValue, delay, duration]);
     
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: delay }}
+            transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
+            style={{ willChange: 'opacity, transform' }}
             className="rounded-2xl border border-white/10 bg-white/5 p-5"
         >
             <div className="text-2xl font-semibold">{formatValue(displayValue, value)}</div>
@@ -96,34 +104,56 @@ export default function Home() {
     useEffect(() => {
         const currentTranslation = translations[currentIndex].text;
         const typingSpeed = isDeleting ? 50 : 100;
+        let frameId;
+        let lastTime = performance.now();
+        let waitTimeout;
         
-        const timer = setTimeout(() => {
-            if (!isDeleting) {
-                // Typing forward
-                if (charIndex < currentTranslation.length) {
-                    setDisplayedText(currentTranslation.slice(0, charIndex + 1));
-                    setCharIndex(charIndex + 1);
+        const animate = (currentTime) => {
+            const delta = currentTime - lastTime;
+            
+            if (delta >= typingSpeed) {
+                lastTime = currentTime;
+                
+                if (!isDeleting) {
+                    // Typing forward
+                    if (charIndex < currentTranslation.length) {
+                        setDisplayedText(currentTranslation.slice(0, charIndex + 1));
+                        setCharIndex(charIndex + 1);
+                        frameId = requestAnimationFrame(animate);
+                    } else {
+                        // Finished typing, wait 2 seconds before deleting
+                        waitTimeout = setTimeout(() => {
+                            setIsDeleting(true);
+                        }, 2000);
+                    }
                 } else {
-                    // Finished typing, wait 2 seconds before deleting
-                    setTimeout(() => {
-                        setIsDeleting(true);
-                    }, 2000);
+                    // Deleting/backspacing
+                    if (charIndex > 0) {
+                        setDisplayedText(currentTranslation.slice(0, charIndex - 1));
+                        setCharIndex(charIndex - 1);
+                        frameId = requestAnimationFrame(animate);
+                    } else {
+                        // Finished deleting, move to next translation and reset
+                        setIsDeleting(false);
+                        setCharIndex(0);
+                        setCurrentIndex((prev) => (prev + 1) % translations.length);
+                    }
                 }
             } else {
-                // Deleting/backspacing
-                if (charIndex > 0) {
-                    setDisplayedText(currentTranslation.slice(0, charIndex - 1));
-                    setCharIndex(charIndex - 1);
-                } else {
-                    // Finished deleting, move to next translation and reset
-                    setIsDeleting(false);
-                    setCharIndex(0);
-                    setCurrentIndex((prev) => (prev + 1) % translations.length);
-                }
+                frameId = requestAnimationFrame(animate);
             }
-        }, typingSpeed);
-
-        return () => clearTimeout(timer);
+        };
+        
+        frameId = requestAnimationFrame(animate);
+        
+        return () => {
+            if (frameId) {
+                cancelAnimationFrame(frameId);
+            }
+            if (waitTimeout) {
+                clearTimeout(waitTimeout);
+            }
+        };
     }, [charIndex, currentIndex, isDeleting, translations]);
 
     const containerVariants = {
@@ -147,6 +177,10 @@ export default function Home() {
                 ease: [0.22, 1, 0.36, 1],
             },
         },
+    };
+    
+    const motionProps = {
+        style: { willChange: 'opacity, transform' }
     };
 
     const tagVariants = {
@@ -177,12 +211,13 @@ export default function Home() {
                     animate="visible"
                     className="w-full"
                 >
-                    <motion.div variants={itemVariants} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-white/70">
                         Welcome to My Portfolio
                     </motion.div>
 
                     <motion.h1
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-4 text-4xl sm:text-6xl font-semibold tracking-tight"
                     >
                         <span className="text-white/70">
@@ -193,6 +228,7 @@ export default function Home() {
 
                     <motion.p
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-5 text-base sm:text-lg text-white/70 leading-7 w-full"
                     >
                         A passionate full-stack developer with a founders mindset. I craft solutions to build
@@ -201,6 +237,7 @@ export default function Home() {
 
                     <motion.div
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-7 flex flex-wrap gap-3"
                     >
                         <Link
@@ -221,24 +258,27 @@ export default function Home() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3"
                 >
                     <Stat value="£10,622,113+" label="Revenue Generated from my projects" delay={0.5} />
-                    <Stat value="4" label="Businesses Scaled and Managed" delay={0.6} />
-                    <Stat value="3+" label="Years Crafting Solutions" delay={0.7} />
+                    <Stat value="4" label="Businesses Scaled and Managed" delay={0.5} />
+                    <Stat value="3+" label="Years Crafting Solutions" delay={0.5} />
                 </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 }}
+                    transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ willChange: 'opacity, transform' }}
                     className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2"
                 >
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.8 }}
+                        transition={{ duration: 0.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'opacity, transform' }}
                         className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <div className="text-sm text-white/70">Focusing on the best</div>
@@ -255,6 +295,7 @@ export default function Home() {
                                     initial="hidden"
                                     animate="visible"
                                     variants={tagVariants}
+                                    style={{ willChange: 'opacity, transform' }}
                                     className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70"
                                 >
                                     {t}
@@ -266,7 +307,8 @@ export default function Home() {
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.9 }}
+                        transition={{ duration: 0.5, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'opacity, transform' }}
                         className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <h2 className="text-2xl font-semibold">Open to collaborations</h2>

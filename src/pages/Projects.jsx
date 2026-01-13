@@ -85,7 +85,8 @@ export default function Projects() {
                             key={t}
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.3, delay: 0.5 + i * 0.05 }}
+                            transition={{ duration: 0.3, delay: 0.5 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                            style={{ willChange: 'opacity, transform' }}
                         >
                             <Pill active={t === active} onClick={() => setActive(t)}>
                                 {t}
@@ -111,8 +112,13 @@ function AnimatedProjectCard({ project, index }) {
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                ease: [0.22, 1, 0.36, 1]
+            }}
+            style={{ willChange: 'opacity, transform' }}
         >
             <ProjectCard project={project} />
         </motion.div>

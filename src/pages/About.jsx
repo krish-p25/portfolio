@@ -12,7 +12,8 @@ function TimelineHeading() {
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            style={{ willChange: 'opacity, transform' }}
             className="mt-12 text-2xl font-semibold"
         >
             Timeline
@@ -29,7 +30,8 @@ function TimelineItem({ time, role, org, desc, index }) {
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            style={{ willChange: 'opacity, transform' }}
             className="rounded-2xl border border-white/10 bg-white/5 p-6"
         >
             <div className="text-xs text-white/60">{time}</div>
@@ -64,6 +66,10 @@ export default function About() {
             },
         },
     };
+    
+    const motionProps = {
+        style: { willChange: 'opacity, transform' }
+    };
 
     const tagVariants = {
         hidden: { opacity: 0, scale: 0.8 },
@@ -93,17 +99,19 @@ export default function About() {
                     animate="visible"
                     className="max-w-3xl"
                 >
-                    <motion.div variants={itemVariants} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-white/70">
                         About me
                     </motion.div>
                     <motion.h1
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-3 text-3xl sm:text-5xl font-semibold tracking-tight"
                     >
                         I build products that move numbers.
                     </motion.h1>
                     <motion.p
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-4 text-white/70 leading-7"
                     >
                         When crafting, I focus on performance and end product quality.
@@ -111,6 +119,7 @@ export default function About() {
 
                     <motion.div
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-6 flex flex-wrap gap-3"
                     >
                         <a
@@ -131,13 +140,15 @@ export default function About() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2"
                 >
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'opacity, transform' }}
                         className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <div className="text-sm text-white/70">Core Stack</div>
@@ -149,6 +160,7 @@ export default function About() {
                                     initial="hidden"
                                     animate="visible"
                                     variants={tagVariants}
+                                    style={{ willChange: 'opacity, transform' }}
                                     className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70"
                                 >
                                     {x}
@@ -164,7 +176,8 @@ export default function About() {
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
+                        transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'opacity, transform' }}
                         className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <div className="text-sm text-white/70">Now</div>

@@ -25,6 +25,10 @@ export default function Contact() {
             },
         },
     };
+    
+    const motionProps = {
+        style: { willChange: 'opacity, transform' }
+    };
 
     return (
         <motion.div
@@ -40,17 +44,19 @@ export default function Contact() {
                     animate="visible"
                     className="max-w-3xl"
                 >
-                    <motion.div variants={itemVariants} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-white/70">
                         Contact
                     </motion.div>
                     <motion.h1
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-3 text-3xl sm:text-5xl font-semibold tracking-tight"
                     >
                         Looking for a Solution?
                     </motion.h1>
                     <motion.p
                         variants={itemVariants}
+                        {...motionProps}
                         className="mt-4 text-white/70 leading-7"
                     >
                         Best way to reach me is by email. If you've got a clear brief + timeline, even better.
@@ -60,13 +66,15 @@ export default function Contact() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2"
                 >
                     <motion.a
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'opacity, transform' }}
                         className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-white/20 transition"
                         href="mailto:krishkp2502@gmail.com"
                     >
@@ -77,7 +85,8 @@ export default function Contact() {
                     <motion.a
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
+                        transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'opacity, transform' }}
                         className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-white/20 transition"
                         href="https://cal.com/krish-p-hwfjhs"
                         target="_blank"

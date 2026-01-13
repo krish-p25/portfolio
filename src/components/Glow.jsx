@@ -22,8 +22,8 @@ export default function Glow() {
             currentY += (targetY - currentY) * 0.15;
 
             if (glowRef.current) {
-                glowRef.current.style.left = `${currentX}px`;
-                glowRef.current.style.top = `${currentY}px`;
+                // Use transform instead of left/top for GPU acceleration
+                glowRef.current.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
             }
 
             animationFrameId = requestAnimationFrame(animate);
@@ -50,8 +50,10 @@ export default function Glow() {
             {/* Cursor-following glow */}
             <div
                 ref={glowRef}
-                className="absolute h-[400px] w-[400px] rounded-full bg-green-500/20 blur-3xl will-change-[left,top]"
+                className="absolute h-[400px] w-[400px] rounded-full bg-green-500/20 blur-3xl will-change-transform"
                 style={{
+                    left: 0,
+                    top: 0,
                     transform: "translate(-50%, -50%)",
                 }}
             />
