@@ -2,6 +2,7 @@ import Container from "../components/Container.jsx";
 import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { projects } from "../data/projects.js";
 
 function Stat({ value, label }) {
     return (
@@ -66,7 +67,7 @@ export default function Home() {
                         </p>
 
                         <div className="mt-5 flex flex-wrap gap-2">
-                            {["React", "Node.js", "PostgreSQL", "AWS", "CSS3", "Express", "Tailwind CSS", "Vite", "HTML5", "Electron", "Git", "GitHub", "JavaScript ES6", "Atlas MongoDB", "+ 3rd Party Integrations"].map((t) => (
+                            {[...new Set(projects.flatMap(project => project.tags))].sort().map((t) => (
                                 <span key={t} className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70">
                                     {t}
                                 </span>
@@ -88,7 +89,7 @@ export default function Home() {
                                 Contact me
                             </Link>
                             <a
-                                href="https://cal.com/"
+                                href="https://cal.com/krish-p-hwfjhs"
                                 target="_blank"
                                 rel="noreferrer"
                                 className="rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-white/80 hover:text-white hover:border-white/20 transition"
