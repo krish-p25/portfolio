@@ -18,7 +18,7 @@ export default function About() {
             <div className="max-w-3xl">
                 <div className="text-sm text-white/70">About me</div>
                 <h1 className="mt-3 text-3xl sm:text-5xl font-semibold tracking-tight">
-                    Not average. I build products that move numbers.
+                    I build products that move numbers.
                 </h1>
                 <p className="mt-4 text-white/70 leading-7">
                     Full-stack developer with a strong product mindset—clean UI, strong backend, and practical delivery.
@@ -26,7 +26,7 @@ export default function About() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                    <a className="rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm hover:bg-white/15 transition" href="#">
+                    <a className="rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm hover:bg-white/15 transition" href="https://docs.google.com/document/d/12ylnVndoXySm5J00QHB1obrKkcNP46ALWHSVS0aoxsU/edit?usp=sharing">
                         My CV
                     </a>
                     <a className="rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-white/80 hover:text-white hover:border-white/20 transition" href="/projects">
@@ -39,7 +39,7 @@ export default function About() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
                     <div className="text-sm text-white/70">Core Stack</div>
                     <div className="mt-3 flex flex-wrap gap-2">
-                        {["React", "NodeJS", "ExpressJS", "PostgreSQL", "AWS EC2", "CloudFlare"].map((x) => (
+                        {["React", "NodeJS", "ExpressJS", "PostgreSQL", "AWS", "CloudFlare"].map((x) => (
                             <span key={x} className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70">
                                 {x}
                             </span>
