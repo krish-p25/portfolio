@@ -33,9 +33,7 @@ export default function Layout() {
 
     const socials = useMemo(
         () => [
-            { label: "GitHub", href: "https://github.com/" },
-            { label: "LinkedIn", href: "https://linkedin.com/" },
-            { label: "X", href: "https://x.com/" },
+            { label: "GitHub", href: "https://github.com/krish-p25" },
         ],
         []
     );
@@ -127,7 +125,7 @@ export default function Layout() {
                     </div>
 
                     <div className="mt-8 text-xs text-white/50">
-                        © {new Date().getFullYear()} YourName. Built with React.
+                        © {new Date().getFullYear()} Krish Patel. Built with React.
                     </div>
                 </Container>
             </footer>
