@@ -224,7 +224,7 @@ export default function Home() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3"
                 >
-                    <Stat value="£10,000,000+" label="Revenue Generated from my projects" delay={0.5} />
+                    <Stat value="£10,622,113+" label="Revenue Generated from my projects" delay={0.5} />
                     <Stat value="4" label="Businesses Scaled and Managed" delay={0.6} />
                     <Stat value="3+" label="Years Crafting Solutions" delay={0.7} />
                 </motion.div>
