@@ -16,13 +16,14 @@ function Stat({ value, label, delay = 0 }) {
     
     // Format the value back to original format
     const formatValue = (num, original) => {
+        const flooredNum = Math.floor(num);
         if (original.includes('£')) {
-            return `£${num.toLocaleString()}+`;
+            return `£${flooredNum.toLocaleString()}+`;
         }
         if (original.includes('+')) {
-            return `${Math.floor(num)}+`;
+            return `${flooredNum}+`;
         }
-        return Math.floor(num).toString();
+        return flooredNum.toString();
     };
     
     const numericValue = getNumericValue(value);
@@ -91,7 +92,6 @@ export default function Home() {
         { text: "أنا كريش", language: "Arabic" },
         { text: "Я Криш", language: "Russian" },
         { text: "나는 크리쉬입니다", language: "Korean" },
-        { text: "Ben Krish", language: "Turkish" },
         { text: "Jag är Krish", language: "Swedish" },
         { text: "Ik ben Krish", language: "Dutch" },
     ], []);
