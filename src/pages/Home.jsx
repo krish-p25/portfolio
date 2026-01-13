@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { projects } from "../data/projects.js";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 function Stat({ value, label, delay = 0 }) {
     const [displayValue, setDisplayValue] = useState(0);
@@ -69,6 +69,63 @@ function Stat({ value, label, delay = 0 }) {
 }
 
 export default function Home() {
+    // Translations of "I'm Krish" in different languages
+    const translations = useMemo(() => [
+        { text: "I'm Krish", language: "English" },
+        { text: "Soy Krish", language: "Spanish" },
+        { text: "Je suis Krish", language: "French" },
+        { text: "Ich bin Krish", language: "German" },
+        { text: "Sono Krish", language: "Italian" },
+        { text: "Eu sou Krish", language: "Portuguese" },
+        { text: "私はクリシュです", language: "Japanese" },
+        { text: "我是克里什", language: "Chinese" },
+        { text: "मैं कृष हूँ", language: "Hindi" },
+        { text: "أنا كريش", language: "Arabic" },
+        { text: "Я Криш", language: "Russian" },
+        { text: "나는 크리쉬입니다", language: "Korean" },
+        { text: "Ben Krish", language: "Turkish" },
+        { text: "Jag är Krish", language: "Swedish" },
+        { text: "Ik ben Krish", language: "Dutch" },
+    ], []);
+
+    const [displayedText, setDisplayedText] = useState("");
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [charIndex, setCharIndex] = useState(0);
+
+    useEffect(() => {
+        const currentTranslation = translations[currentIndex].text;
+        const typingSpeed = isDeleting ? 50 : 100;
+        
+        const timer = setTimeout(() => {
+            if (!isDeleting) {
+                // Typing forward
+                if (charIndex < currentTranslation.length) {
+                    setDisplayedText(currentTranslation.slice(0, charIndex + 1));
+                    setCharIndex(charIndex + 1);
+                } else {
+                    // Finished typing, wait 2 seconds before deleting
+                    setTimeout(() => {
+                        setIsDeleting(true);
+                    }, 2000);
+                }
+            } else {
+                // Deleting/backspacing
+                if (charIndex > 0) {
+                    setDisplayedText(currentTranslation.slice(0, charIndex - 1));
+                    setCharIndex(charIndex - 1);
+                } else {
+                    // Finished deleting, move to next translation and reset
+                    setIsDeleting(false);
+                    setCharIndex(0);
+                    setCurrentIndex((prev) => (prev + 1) % translations.length);
+                }
+            }
+        }, typingSpeed);
+
+        return () => clearTimeout(timer);
+    }, [charIndex, currentIndex, isDeleting, translations]);
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -121,14 +178,17 @@ export default function Home() {
                     className="w-full"
                 >
                     <motion.div variants={itemVariants} className="text-sm text-white/70">
-                        Welcome to <span className="text-white">Krish</span>&apos;s Portfolio
+                        Welcome to My Portfolio
                     </motion.div>
 
                     <motion.h1
                         variants={itemVariants}
                         className="mt-4 text-4xl sm:text-6xl font-semibold tracking-tight"
                     >
-                        I'm <span className="text-white">Krish</span>
+                        <span className="text-white/70">
+                            {displayedText}
+                        </span>
+                        <span className="text-white animate-pulse">|</span>
                     </motion.h1>
 
                     <motion.p
