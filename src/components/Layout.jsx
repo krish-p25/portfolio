@@ -56,19 +56,19 @@ export default function Layout() {
                         ))}
                     </nav>
 
-                    <div className="hidden sm:flex items-center gap-3">
+                    <div className="hidden  items-center gap-3">
                         <a
                             className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70 hover:text-white hover:border-white/20 transition"
-                            href="/contact"
+                            
                         >
-                            Message me
+                            Message Me
                         </a>
                     </div>
 
                     <button
                         className="sm:hidden rounded-xl border border-white/10 bg-white/5 p-2 text-white/80"
                         onClick={() => setOpen((v) => !v)}
-                        aria-label="Toggle menu"
+                        aria-label="Toggle Menu"
                     >
                         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                     </button>
