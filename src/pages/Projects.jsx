@@ -22,9 +22,9 @@ export default function Projects() {
         <Container className="pt-14 pb-16 sm:pt-20">
             <div className="max-w-3xl">
                 <div className="text-sm text-white/70">My Projects</div>
-                <h1 className="mt-3 text-3xl sm:text-5xl font-semibold tracking-tight">Stuff I’ve shipped</h1>
+                <h1 className="mt-3 text-3xl sm:text-5xl font-semibold tracking-tight">Solutions I’ve shipped</h1>
                 <p className="mt-4 text-white/70 leading-7">
-                    A mix of client work and personal products—focused on clean UX, performance, and real business outcomes.
+                    A mix of client work and personal products—focused on scalability, performance, and real business outcomes.
                 </p>
             </div>
 
