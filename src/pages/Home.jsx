@@ -135,8 +135,8 @@ export default function Home() {
                         variants={itemVariants}
                         className="mt-5 text-base sm:text-lg text-white/70 leading-7 w-full"
                     >
-                        A passionate full-stack developer with creative thinking. I craft solutions and build
-                        revenue-impacting and scalable products.
+                        A passionate full-stack developer with a founders mindset. I craft solutions to build
+                        revenue-impacting and scalable products for startups and businesses.
                     </motion.p>
 
                     <motion.div

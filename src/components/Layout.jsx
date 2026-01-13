@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Container from "./Container.jsx";
 import Glow from "./Glow.jsx";
@@ -30,6 +30,16 @@ function NavItem({ to, children, onClick }) {
 
 export default function Layout() {
     const [open, setOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const socials = useMemo(
         () => [
@@ -42,8 +52,14 @@ export default function Layout() {
         <div className="relative min-h-screen bg-zinc-950">
             <Glow />
 
-            <header className="relative z-20 border-b border-white/10 bg-black/20 backdrop-blur">
-                <Container className="flex h-16 items-center justify-between">
+            <header className={`sticky z-20 border-b border-white/10 bg-black/20 backdrop-blur transition-all duration-300 ${
+                isScrolled 
+                    ? "top-4 mx-4 sm:mx-8 rounded-2xl border shadow-lg shadow-black/20" 
+                    : "top-0 mx-0 rounded-none"
+            }`}>
+                <Container className={`flex h-16 items-center justify-between transition-all duration-300 ${
+                    isScrolled ? "px-6" : ""
+                }`}>
                     <NavLink to="/" className="font-semibold tracking-tight">
                         <span className="text-white">Krish Patel</span>
                     </NavLink>
@@ -75,8 +91,12 @@ export default function Layout() {
                 </Container>
 
                 {open && (
-                    <div className="sm:hidden border-t border-white/10 bg-black/40 backdrop-blur">
-                        <Container className="py-4 flex flex-col gap-3">
+                    <div className={`sm:hidden border-t border-white/10 bg-black/40 backdrop-blur transition-all duration-300 ${
+                        isScrolled ? "rounded-b-2xl" : ""
+                    }`}>
+                        <Container className={`py-4 flex flex-col gap-3 transition-all duration-300 ${
+                            isScrolled ? "px-6" : ""
+                        }`}>
                             {nav.map((n) => (
                                 <NavItem key={n.to} to={n.to} onClick={() => setOpen(false)}>
                                     {n.label}

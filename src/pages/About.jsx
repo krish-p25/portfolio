@@ -106,8 +106,7 @@ export default function About() {
                         variants={itemVariants}
                         className="mt-4 text-white/70 leading-7"
                     >
-                        Full-stack developer with a strong product mindset—clean UI, strong backend, and practical delivery.
-                        I like fast feedback loops, measurable impact, and shipping.
+                        When crafting, I focus on performance and end product quality.
                     </motion.p>
 
                     <motion.div
