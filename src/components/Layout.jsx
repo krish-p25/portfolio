@@ -62,7 +62,7 @@ export default function Layout() {
 
             <header className={`sticky z-20 border-b border-white/10 bg-black/20 backdrop-blur transition-all duration-300 ${
                 isScrolled 
-                    ? "top-4 mx-4 sm:mx-8 rounded-2xl border shadow-lg shadow-black/20" 
+                    ? "top-4 mx-8 sm:mx-12 rounded-2xl border shadow-lg shadow-black/20" 
                     : "top-0 mx-0 rounded-none"
             }`}>
                 <Container className={`flex h-16 items-center justify-between transition-all duration-300 ${
