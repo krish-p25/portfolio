@@ -38,7 +38,15 @@ function TimelineItem({ time, role, org, desc, index }) {
             <div className="mt-2 text-base font-semibold">
                 {role} <span className="text-white/60">· {org}</span>
             </div>
-            <p className="mt-2 text-sm text-white/70 leading-6">{desc}</p>
+            {Array.isArray(desc) ? (
+                <ul className="mt-2 text-sm text-white/70 leading-6 list-disc list-inside space-y-1">
+                    {desc.map((item, i) => (
+                        <li key={i}>{item}</li>
+                    ))}
+                </ul>
+            ) : (
+                <p className="mt-2 text-sm text-white/70 leading-6">{desc}</p>
+            )}
         </motion.div>
     );
 }
@@ -194,21 +202,41 @@ export default function About() {
                         time="2024 — 2026"
                         role="Full-Stack Engineer"
                         org="Kensulate Corporation"
-                        desc="Built a bespoke bulk dropshipping platform, automating inventory sync, order routing, and fulfilment workflows. Personalised commissions, pricing structure, sales reporting, and more, generates £30,000+ in sales monthly."
+                        desc={[
+                            "Was tasked with automating dropshipped orders and inventory management.",
+                            "Translated wireframes into fully responsive interfaces using HTML5, CSS, and JavaScript, optimizing for mobile-first performance across devices.",
+                            "Built a backend using Node.js, Express.js, and PostgreSQL, to ensure maximum performance and scalability.",
+                            "Automated inventory syncing, order routing, and fulfilment workflows to minimise manual friction and increase efficiency, using clean code and best practices.",
+                            "Personalised commissions, pricing structure, sales reporting, and more to maximise revenue.",
+                            "Generates £30,000+ in sales monthly."
+                        ]}
                         index={0}
                     />
                     <TimelineItem
-                        time="2023 — 2025"
+                        time="2023 — 2026"
                         role="Full-Stack Engineer"
                         org="Shopify Partners Program"
-                        desc="Led development of a custom B2B SaaS platform enabling real-time dynamic pricing, automated consignor payouts, and sales reporting for two industry-leading retail stores, scaling annual revenue into the 8 figures."
+                        desc={[
+                            "Company required automation for their consignment inventory.",
+                            "Built a custom B2B SaaS platform to automate full consignment flow, from user sign-up, inventory listing, shipment creation, stock authentication to sales payout.",
+                            "Custom pricing structure available for staff to manipulate, with extensive sales reporting and analytics.",
+                            "Cut employee workload by 90%, allowing them to focus on other tasks.",
+                            "Intricately designed staff portal for managing user sign-ups, inventory approval, staff permissions, inventory transfer, and more.",
+                            "Scaled to 400+ users and processes £10k+ in sales daily."
+                        ]}
                         index={1}
                     />
                     <TimelineItem
                         time="2020 — 2023"
                         role="Backend Engineer"
                         org="Self Employed Founder"
-                        desc="Founded 11Notify, a platform that alerts customers the moment high-ticket products come back in stock. Scaled to 350+ customers and sold after 3 years of growth."
+                        desc={[
+                            "Founded 11Notify, a platform that alerts customers the moment high-ticket products come back in stock.",
+                            "Leveraged NodeJS and Worker Threads to monitor over 100 websites and over 1,000 products simultaneously, sending alerts to customers in real-time.",
+                            "Implemented webhooks and API integrations with various platforms to automate the alerting process and reduce manual effort.",
+                            "Built a custom integration between Stripe, Whatsapp and Discord to ensure seamless communication between customers and the platform.",
+                            "Scaled to 350+ customers and sold after 3 years of growth."
+                        ]}
                         index={2}
                     />
                 </div>
