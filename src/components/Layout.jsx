@@ -130,7 +130,6 @@ export default function Layout() {
                 <Container className="py-10">
                     <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <div className="text-sm text-white/70">Links</div>
                             <div className="mt-2 flex flex-wrap gap-4">
                                 {nav.map((n) => (
                                     <NavLink key={n.to} to={n.to} className="text-sm text-white/70 hover:text-white">
@@ -141,7 +140,6 @@ export default function Layout() {
                         </div>
 
                         <div>
-                            <div className="text-sm text-white/70">Socials</div>
                             <div className="mt-2 flex flex-wrap gap-4">
                                 {socials.map((s) => (
                                     <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="text-sm text-white/70 hover:text-white">
