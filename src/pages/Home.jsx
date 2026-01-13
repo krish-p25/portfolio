@@ -136,7 +136,7 @@ export default function Home() {
                         className="mt-5 text-base sm:text-lg text-white/70 leading-7 w-full"
                     >
                         A passionate full-stack developer with creative thinking. I craft solutions and build
-                        revenue-impacting, scalable, and impactful products.
+                        revenue-impacting and scalable products.
                     </motion.p>
 
                     <motion.div

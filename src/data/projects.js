@@ -93,7 +93,7 @@ export const projects = [
     },
     {
         title: "Bulk Dropshipping Platform",
-        description: "A platform for managing bulk dropshipping orders and inventory. System fully automated from product creation, inventory sync to order fulfilment. Generates £30k in revenue monthly.",
+        description: "A platform for managing bulk dropshipping orders and inventory. System fully automated from product creation, inventory sync and order fulfilment. Generates £30k in revenue monthly.",
         tags: [
             "Shopify API",
             "NodeJS",
