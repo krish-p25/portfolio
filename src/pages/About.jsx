@@ -122,7 +122,7 @@ export default function About() {
                         {...motionProps}
                         className="mt-4 text-white/70 leading-7"
                     >
-                        When crafting, I focus on performance and end product quality.
+                        When crafting, I focus on the value my code is adding to the world.
                     </motion.p>
 
                     <motion.div
