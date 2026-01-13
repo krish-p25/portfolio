@@ -71,6 +71,7 @@ export const projects = [
             "Discord API",
             "Webhooks",
             "Web Scraping",
+            "Whatsapp API",
         ],
     },
     {
@@ -117,6 +118,9 @@ export const projects = [
             "NodeJS",
             "ExpressJS",
             "PostgreSQL",
+            "Sequelize",
+            "Git",
+            "GitHub"
         ],
     },
     {
