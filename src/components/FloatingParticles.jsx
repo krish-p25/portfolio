@@ -53,7 +53,7 @@ export default function FloatingParticles() {
                 // Draw particle
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(34, 197, 94, ${particle.opacity})`;
+                ctx.fillStyle = `rgba(168, 85, 247, ${particle.opacity})`;
                 ctx.fill();
             });
 
