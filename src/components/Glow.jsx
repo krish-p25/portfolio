@@ -59,13 +59,7 @@ export default function Glow() {
             />
             
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(168,85,247,0.08),transparent_55%)]" />
-            <div
-                className="absolute inset-0"
-                style={{
-                    background:
-                        "linear-gradient(to_bottom, rgba(var(--shade-rgb), 0), rgba(var(--shade-rgb), var(--shade-alpha-mid)), rgba(var(--shade-rgb), var(--shade-alpha-bottom)))",
-                }}
-            />
+            <div className="shade-overlay absolute inset-0" />
         </div>
     );
 }

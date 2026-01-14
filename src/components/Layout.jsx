@@ -95,7 +95,7 @@ export default function Layout() {
                         <button
                             type="button"
                             onClick={toggleTheme}
-                            className="rounded-xl border border-subtle bg-surface px-2.5 py-1.5 text-muted-strong hover:text-primary hover:border-strong transition"
+                            className="rounded-xl border border-subtle bg-surface px-2.5 py-1.5 text-muted-strong hover:text-primary hover:border-strong transition cursor-pointer"
                             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                         >
                             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
