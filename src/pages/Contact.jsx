@@ -1,6 +1,28 @@
 import Container from "../components/Container.jsx";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import useTiltEffect from "../hooks/useTiltEffect.js";
+
+function ContactCard({ children, initial, animate, transition, href, target, rel }) {
+    const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
+
+    return (
+        <motion.a
+            ref={ref}
+            {...handlers}
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            style={{ ...tiltStyles, willChange: 'opacity, transform' }}
+            className="block rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-white/20 transition"
+            href={href}
+            target={target}
+            rel={rel}
+        >
+            {children}
+        </motion.a>
+    );
+}
 
 export default function Contact() {
     const containerVariants = {
@@ -70,31 +92,27 @@ export default function Contact() {
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2"
                 >
-                    <motion.a
+                    <ContactCard
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ willChange: 'opacity, transform' }}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-white/20 transition"
                         href="mailto:krishkp2502@gmail.com"
                     >
                         <div className="text-sm text-white/70">Email</div>
                         <div className="mt-2 text-lg font-semibold">krishkp2502@gmail.com</div>
-                    </motion.a>
+                    </ContactCard>
 
-                    <motion.a
+                    <ContactCard
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ willChange: 'opacity, transform' }}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-white/20 transition"
                         href="https://cal.com/krish-p-hwfjhs"
                         target="_blank"
                         rel="noreferrer"
                     >
                         <div className="text-sm text-white/70">Book a Meeting</div>
                         <div className="mt-2 text-lg font-semibold">Calendar Link</div>
-                    </motion.a>
+                    </ContactCard>
                 </motion.div>
             </Container>
         </motion.div>

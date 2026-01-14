@@ -2,6 +2,25 @@ import Container from "../components/Container.jsx";
 // eslint-disable-next-line no-unused-vars
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import useTiltEffect from "../hooks/useTiltEffect.js";
+
+function AboutCard({ children, initial, animate, transition }) {
+    const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
+
+    return (
+        <motion.div
+            ref={ref}
+            {...handlers}
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            style={{ ...tiltStyles, willChange: 'opacity, transform' }}
+            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+        >
+            {children}
+        </motion.div>
+    );
+}
 
 function TimelineHeading() {
     const ref = useRef(null);
@@ -22,16 +41,21 @@ function TimelineHeading() {
 }
 
 function TimelineItem({ time, role, org, desc, index }) {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const viewRef = useRef(null);
+    const isInView = useInView(viewRef, { once: true, margin: "-100px" });
+    const { ref: tiltRef, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 5 });
 
     return (
         <motion.div
-            ref={ref}
+            ref={(el) => {
+                viewRef.current = el;
+                tiltRef.current = el;
+            }}
+            {...handlers}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            style={{ willChange: 'opacity, transform' }}
+            style={{ ...tiltStyles, willChange: 'opacity, transform' }}
             className="rounded-2xl border border-white/10 bg-white/5 p-6"
         >
             <div className="text-xs text-white/60">{time}</div>
@@ -152,12 +176,10 @@ export default function About() {
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2"
                 >
-                    <motion.div
+                    <AboutCard
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ willChange: 'opacity, transform' }}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <div className="text-sm text-white/70">Core Stack</div>
                         <div className="mt-3 flex flex-wrap gap-2">
@@ -179,21 +201,19 @@ export default function About() {
                         <p className="mt-4 text-sm text-white/70 leading-6">
                             I care about performance, reliability, and UX polish. If it's not crisp, it's not done.
                         </p>
-                    </motion.div>
+                    </AboutCard>
 
-                    <motion.div
+                    <AboutCard
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ willChange: 'opacity, transform' }}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <div className="text-sm text-white/70">Now</div>
                         <h2 className="mt-2 text-2xl font-semibold">Building + Iterating</h2>
                         <p className="mt-3 text-sm text-white/70 leading-6">
                             Currently focused on shipping B2B tools, improving conversion, and scaling infra without any drawbacks.
                         </p>
-                    </motion.div>
+                    </AboutCard>
                 </motion.div>
 
                 <TimelineHeading />

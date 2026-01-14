@@ -4,16 +4,36 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects.js";
 import { useEffect, useState, useMemo } from "react";
+import useTiltEffect from "../hooks/useTiltEffect.js";
+
+function FeatureCard({ children, initial, animate, transition }) {
+    const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
+
+    return (
+        <motion.div
+            ref={ref}
+            {...handlers}
+            initial={initial}
+            animate={animate}
+            transition={transition}
+            style={{ ...tiltStyles, willChange: 'opacity, transform' }}
+            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+        >
+            {children}
+        </motion.div>
+    );
+}
 
 function Stat({ value, label, delay = 0 }) {
     const [displayValue, setDisplayValue] = useState(0);
-    
+    const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
+
     // Extract numeric value from string (handles "£10,000,000+", "4", "3+", etc.)
     const getNumericValue = (val) => {
         const cleaned = val.replace(/[£,+\s]/g, '');
         return parseFloat(cleaned) || 0;
     };
-    
+
     // Format the value back to original format
     const formatValue = (num, original) => {
         const flooredNum = Math.floor(num);
@@ -25,50 +45,52 @@ function Stat({ value, label, delay = 0 }) {
         }
         return flooredNum.toString();
     };
-    
+
     const numericValue = getNumericValue(value);
     const duration = 2; // seconds
-    
+
     useEffect(() => {
         const startTime = performance.now() + delay * 1000;
         let animationFrameId;
-        
+
         const animate = (currentTime) => {
             const elapsed = (currentTime - startTime) / 1000;
             if (elapsed < 0) {
                 animationFrameId = requestAnimationFrame(animate);
                 return;
             }
-            
+
             const progress = Math.min(elapsed / duration, 1);
             // Easing function for smooth animation
             const eased = 1 - Math.pow(1 - progress, 3);
             const current = numericValue * eased;
-            
+
             setDisplayValue(current);
-            
+
             if (progress < 1) {
                 animationFrameId = requestAnimationFrame(animate);
             } else {
                 setDisplayValue(numericValue);
             }
         };
-        
+
         animationFrameId = requestAnimationFrame(animate);
-        
+
         return () => {
             if (animationFrameId) {
                 cancelAnimationFrame(animationFrameId);
             }
         };
     }, [numericValue, delay, duration]);
-    
+
     return (
         <motion.div
+            ref={ref}
+            {...handlers}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
-            style={{ willChange: 'opacity, transform' }}
+            style={{ ...tiltStyles, willChange: 'opacity, transform' }}
             className="rounded-2xl border border-white/10 bg-white/5 p-5"
         >
             <div className="text-2xl font-semibold">{formatValue(displayValue, value)}</div>
@@ -274,12 +296,10 @@ export default function Home() {
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2"
                 >
-                    <motion.div
+                    <FeatureCard
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ willChange: 'opacity, transform' }}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <div className="text-sm text-white/70">Focusing on the best</div>
                         <h2 className="mt-2 text-2xl font-semibold">Multiple Tech Stack</h2>
@@ -302,14 +322,12 @@ export default function Home() {
                                 </motion.span>
                             ))}
                         </div>
-                    </motion.div>
+                    </FeatureCard>
 
-                    <motion.div
+                    <FeatureCard
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ willChange: 'opacity, transform' }}
-                        className="rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
                         <h2 className="text-2xl font-semibold">Open to collaborations</h2>
                         <p className="mt-3 text-sm text-white/70 leading-6">
@@ -332,7 +350,7 @@ export default function Home() {
                                 Book a meeting
                             </a>
                         </div>
-                    </motion.div>
+                    </FeatureCard>
                 </motion.div>
             </Container>
         </motion.div>

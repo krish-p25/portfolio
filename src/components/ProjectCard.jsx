@@ -1,8 +1,16 @@
 import { ExternalLink } from "lucide-react";
+import useTiltEffect from "../hooks/useTiltEffect.js";
 
 export default function ProjectCard({ project }) {
+    const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02 });
+
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+        <div
+            ref={ref}
+            {...handlers}
+            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+            style={tiltStyles}
+        >
             <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_55%)]" />
             <div className="relative p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-4">

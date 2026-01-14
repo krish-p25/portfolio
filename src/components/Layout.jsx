@@ -2,6 +2,8 @@ import { Outlet, NavLink } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Container from "./Container.jsx";
+import GradientMesh from "./GradientMesh.jsx";
+import FloatingParticles from "./FloatingParticles.jsx";
 import Glow from "./Glow.jsx";
 
 const nav = [
@@ -58,6 +60,8 @@ export default function Layout() {
 
     return (
         <div className="relative min-h-screen bg-zinc-950">
+            <GradientMesh />
+            <FloatingParticles />
             <Glow />
 
             <header className={`sticky z-20 border-b border-white/10 bg-black/20 backdrop-blur transition-all duration-300 ${
