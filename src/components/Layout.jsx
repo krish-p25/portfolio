@@ -80,9 +80,11 @@ export default function Layout() {
             <FloatingParticles />
             <Glow />
 
-            <header className={`sticky z-20 border-b border-subtle bg-glass backdrop-blur transition-all duration-300 ${
+            <header className={`sticky z-20 border-b border-subtle bg-glass backdrop-blur transition-all duration-300 relative ${
                 isScrolled 
-                    ? "top-4 mx-8 sm:mx-12 rounded-2xl border shadow-lg shadow-black/20" 
+                    ? open
+                        ? "top-4 mx-8 sm:mx-12 rounded-t-2xl rounded-b-none border shadow-lg shadow-black/20"
+                        : "top-4 mx-8 sm:mx-12 rounded-2xl border shadow-lg shadow-black/20" 
                     : "top-0 mx-0 rounded-none"
             }`}>
                 <Container className={`flex h-16 items-center justify-between transition-all duration-300 ${
@@ -129,7 +131,7 @@ export default function Layout() {
                 </Container>
 
                 {open && (
-                    <div className={`sm:hidden border-t border-subtle bg-glass-strong backdrop-blur transition-all duration-300 ${
+                    <div className={`sm:hidden absolute left-0 right-0 top-full border-t border-subtle bg-app transition-all duration-300 ${
                         isScrolled ? "rounded-b-2xl" : ""
                     }`}>
                         <Container className={`py-4 flex flex-col gap-3 transition-all duration-300 ${
