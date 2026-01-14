@@ -4,8 +4,8 @@ export default function useTiltEffect(options = {}) {
     const {
         maxTilt = 8,
         scale = 1.03,
-        glowColor = "rgba(34, 197, 94, 0.2)",
-        glowBorderColor = "rgba(34, 197, 94, 0.3)",
+        glowColor = "rgba(var(--accent-rgb), 0.2)",
+        glowBorderColor = "rgba(var(--accent-rgb), 0.3)",
     } = options;
 
     const [isHovered, setIsHovered] = useState(false);
