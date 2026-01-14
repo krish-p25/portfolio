@@ -2,6 +2,45 @@
 
 :root {
   color-scheme: dark;
+  --bg: #09090b;
+  --text-primary: #f8fafc;
+  --text-muted-strong: rgba(248, 250, 252, 0.8);
+  --text-muted: rgba(248, 250, 252, 0.7);
+  --text-subtle: rgba(248, 250, 252, 0.6);
+  --text-faint: rgba(248, 250, 252, 0.5);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-soft: rgba(255, 255, 255, 0.15);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-stronger: rgba(255, 255, 255, 0.3);
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --surface-hover: rgba(255, 255, 255, 0.15);
+  --surface-ghost: rgba(255, 255, 255, 0.03);
+  --glass: rgba(0, 0, 0, 0.2);
+  --glass-strong: rgba(0, 0, 0, 0.4);
+  --chip-bg: rgba(0, 0, 0, 0.3);
+  --accent-rgb: 168, 85, 247;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --text-primary: #0f172a;
+  --text-muted-strong: rgba(15, 23, 42, 0.8);
+  --text-muted: rgba(15, 23, 42, 0.7);
+  --text-subtle: rgba(15, 23, 42, 0.6);
+  --text-faint: rgba(15, 23, 42, 0.5);
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --border-soft: rgba(15, 23, 42, 0.18);
+  --border-strong: rgba(15, 23, 42, 0.24);
+  --border-stronger: rgba(15, 23, 42, 0.32);
+  --surface: rgba(15, 23, 42, 0.04);
+  --surface-strong: rgba(15, 23, 42, 0.08);
+  --surface-hover: rgba(15, 23, 42, 0.12);
+  --surface-ghost: rgba(15, 23, 42, 0.02);
+  --glass: rgba(255, 255, 255, 0.75);
+  --glass-strong: rgba(255, 255, 255, 0.9);
+  --chip-bg: rgba(15, 23, 42, 0.06);
 }
 
 html,
@@ -11,8 +50,96 @@ body,
 }
 
 body {
-  background: #09090b;
-  color: white;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+.bg-app {
+  background: var(--bg);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-muted-strong {
+  color: var(--text-muted-strong);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-subtle {
+  color: var(--text-subtle);
+}
+
+.text-faint {
+  color: var(--text-faint);
+}
+
+.border-subtle {
+  border-color: var(--border-subtle);
+}
+
+.border-soft {
+  border-color: var(--border-soft);
+}
+
+.border-strong {
+  border-color: var(--border-strong);
+}
+
+.border-stronger {
+  border-color: var(--border-stronger);
+}
+
+.bg-surface {
+  background: var(--surface);
+}
+
+.bg-surface-strong {
+  background: var(--surface-strong);
+}
+
+.bg-surface-hover {
+  background: var(--surface-hover);
+}
+
+.bg-surface-ghost {
+  background: var(--surface-ghost);
+}
+
+.bg-glass {
+  background: var(--glass);
+}
+
+.bg-glass-strong {
+  background: var(--glass-strong);
+}
+
+.bg-chip {
+  background: var(--chip-bg);
+}
+
+.hover\:text-primary:hover {
+  color: var(--text-primary);
+}
+
+.hover\:border-strong:hover {
+  border-color: var(--border-strong);
+}
+
+.hover\:border-soft:hover {
+  border-color: var(--border-soft);
+}
+
+.hover\:bg-surface-hover:hover {
+  background: var(--surface-hover);
+}
+
+.hover\:bg-surface-strong:hover {
+  background: var(--surface-strong);
 }
 
 /* Performance optimizations for animations */
