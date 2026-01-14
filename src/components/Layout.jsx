@@ -75,7 +75,7 @@ export default function Layout() {
     );
 
     return (
-        <div className="relative min-h-screen bg-app">
+        <div className="relative min-h-screen bg-app flex flex-col">
             <GradientMesh />
             <FloatingParticles />
             <Glow />
@@ -152,7 +152,7 @@ export default function Layout() {
                 )}
             </header>
 
-            <main className="relative z-10">
+            <main className="relative z-10 flex-1">
                 <Outlet />
             </main>
 
