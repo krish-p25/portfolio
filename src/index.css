@@ -20,6 +20,9 @@
   --glass-strong: rgba(0, 0, 0, 0.4);
   --chip-bg: rgba(0, 0, 0, 0.3);
   --accent-rgb: 168, 85, 247;
+  --shade-rgb: 0, 0, 0;
+  --shade-alpha-mid: 0.45;
+  --shade-alpha-bottom: 0.85;
 }
 
 [data-theme="light"] {
@@ -41,6 +44,9 @@
   --glass: rgba(255, 255, 255, 0.75);
   --glass-strong: rgba(255, 255, 255, 0.9);
   --chip-bg: rgba(15, 23, 42, 0.06);
+  --shade-rgb: 255, 255, 255;
+  --shade-alpha-mid: 0.12;
+  --shade-alpha-bottom: 0.2;
 }
 
 html,
