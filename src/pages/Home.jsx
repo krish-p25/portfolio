@@ -17,7 +17,7 @@ function FeatureCard({ children, initial, animate, transition }) {
             animate={animate}
             transition={transition}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
-            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+            className="rounded-2xl border border-subtle bg-surface p-6"
         >
             {children}
         </motion.div>
@@ -91,10 +91,10 @@ function Stat({ value, label, delay = 0 }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5"
+            className="rounded-2xl border border-subtle bg-surface p-5"
         >
             <div className="text-2xl font-semibold">{formatValue(displayValue, value)}</div>
-            <div className="mt-1 text-sm text-white/70">{label}</div>
+            <div className="mt-1 text-sm text-muted">{label}</div>
         </motion.div>
     );
 }
@@ -233,7 +233,7 @@ export default function Home() {
                     animate="visible"
                     className="w-full"
                 >
-                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-muted">
                         Welcome to My Portfolio
                     </motion.div>
 
@@ -242,16 +242,16 @@ export default function Home() {
                         {...motionProps}
                         className="mt-4 text-4xl sm:text-6xl font-semibold tracking-tight"
                     >
-                        <span className="text-white/70">
+                        <span className="text-muted">
                             {displayedText}
                         </span>
-                        <span className="text-white animate-pulse">|</span>
+                        <span className="text-primary animate-pulse">|</span>
                     </motion.h1>
 
                     <motion.p
                         variants={itemVariants}
                         {...motionProps}
-                        className="mt-5 text-base sm:text-lg text-white/70 leading-7 w-full"
+                        className="mt-5 text-base sm:text-lg text-muted leading-7 w-full"
                     >
                         A passionate full-stack developer with a founders mindset. I craft solutions to build
                         revenue-impacting and scalable products for startups and businesses.
@@ -264,13 +264,13 @@ export default function Home() {
                     >
                         <Link
                             to="/projects"
-                            className="rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm hover:bg-white/15 transition"
+                            className="rounded-2xl border border-soft bg-surface-strong px-5 py-2.5 text-sm text-primary hover:bg-surface-hover transition"
                         >
                             My Projects
                         </Link>
                         <Link
                             to="/about"
-                            className="rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-white/80 hover:text-white hover:border-white/20 transition"
+                            className="rounded-2xl border border-subtle bg-surface px-5 py-2.5 text-sm text-muted-strong hover:text-primary hover:border-strong transition"
                         >
                             About Me
                         </Link>
@@ -301,9 +301,9 @@ export default function Home() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <div className="text-sm text-white/70">Focusing on the best</div>
+                        <div className="text-sm text-muted">Focusing on the best</div>
                         <h2 className="mt-2 text-2xl font-semibold">Multiple Tech Stack</h2>
-                        <p className="mt-3 text-sm text-white/70 leading-6">
+                        <p className="mt-3 text-sm text-muted leading-6">
                             I work across modern frameworks, backend systems, and cloud tooling to ship scalable, stable products.
                         </p>
 
@@ -316,7 +316,7 @@ export default function Home() {
                                     animate="visible"
                                     variants={tagVariants}
                                     style={{ willChange: 'opacity, transform' }}
-                                    className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70"
+                                    className="rounded-full border border-subtle bg-chip px-3 py-1 text-xs text-muted"
                                 >
                                     {t}
                                 </motion.span>
@@ -330,14 +330,14 @@ export default function Home() {
                         transition={{ duration: 0.5, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
                     >
                         <h2 className="text-2xl font-semibold">Open to collaborations</h2>
-                        <p className="mt-3 text-sm text-white/70 leading-6">
+                        <p className="mt-3 text-sm text-muted leading-6">
                             Whether it's a small feature or your next big SaaS, I'm happy to jump in and help you ship.
                         </p>
 
                         <div className="mt-6 flex flex-wrap gap-3">
                             <Link
                                 to="/contact"
-                                className="rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm hover:bg-white/15 transition"
+                                className="rounded-2xl border border-soft bg-surface-strong px-5 py-2.5 text-sm text-primary hover:bg-surface-hover transition"
                             >
                                 Contact me
                             </Link>
@@ -345,7 +345,7 @@ export default function Home() {
                                 href="https://cal.com/krish-p-hwfjhs"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-white/80 hover:text-white hover:border-white/20 transition"
+                                className="rounded-2xl border border-subtle bg-surface px-5 py-2.5 text-sm text-muted-strong hover:text-primary hover:border-strong transition"
                             >
                                 Book a meeting
                             </a>
