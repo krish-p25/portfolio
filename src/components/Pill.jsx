@@ -5,8 +5,8 @@ export default function Pill({ children, active = false, onClick }) {
             className={[
                 "rounded-full border px-3 py-1 text-xs sm:text-sm transition cursor-pointer",
                 active
-                    ? "border-white/30 bg-white/10 text-white"
-                    : "border-white/10 bg-white/5 text-white/70 hover:text-white hover:border-white/20",
+                    ? "border-stronger bg-surface-strong text-primary"
+                    : "border-subtle bg-surface text-muted hover:text-primary hover:border-strong",
             ].join(" ")}
         >
             {children}
