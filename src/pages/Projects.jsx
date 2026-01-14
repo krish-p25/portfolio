@@ -119,6 +119,7 @@ function AnimatedProjectCard({ project, index }) {
                 ease: [0.22, 1, 0.36, 1]
             }}
             style={{ willChange: 'opacity, transform' }}
+            className="h-full"
         >
             <ProjectCard project={project} />
         </motion.div>

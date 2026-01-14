@@ -8,11 +8,11 @@ export default function ProjectCard({ project }) {
         <div
             ref={ref}
             {...handlers}
-            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5"
+            className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/5"
             style={tiltStyles}
         >
             <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_55%)]" />
-            <div className="relative p-5 sm:p-6">
+            <div className="relative flex h-full flex-col p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-4">
                     <div>
                         <h3 className="text-base sm:text-lg font-semibold">{project.title}</h3>
@@ -32,7 +32,7 @@ export default function ProjectCard({ project }) {
                     )}
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2 sm:mt-auto">
                     {project.tags.map((t) => (
                         <span
                             key={t}
