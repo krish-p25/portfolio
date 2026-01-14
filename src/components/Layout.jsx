@@ -1,6 +1,6 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import Container from "./Container.jsx";
 import GradientMesh from "./GradientMesh.jsx";
 import FloatingParticles from "./FloatingParticles.jsx";
@@ -21,7 +21,7 @@ function NavItem({ to, children, onClick }) {
             className={({ isActive }) =>
                 [
                     "text-sm transition",
-                    isActive ? "text-white" : "text-white/70 hover:text-white",
+                    isActive ? "text-primary" : "text-muted hover:text-primary",
                 ].join(" ")
             }
         >
@@ -33,6 +33,13 @@ function NavItem({ to, children, onClick }) {
 export default function Layout() {
     const [open, setOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [theme, setTheme] = useState(() => {
+        if (typeof window === "undefined") return "dark";
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) return storedTheme;
+        const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+        return prefersDark ? "dark" : "light";
+    });
 
     useEffect(() => {
         let ticking = false;
@@ -51,6 +58,15 @@ export default function Layout() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    };
+
     const socials = useMemo(
         () => [
             { label: "GitHub", href: "https://github.com/krish-p25" },
@@ -59,12 +75,12 @@ export default function Layout() {
     );
 
     return (
-        <div className="relative min-h-screen bg-zinc-950">
+        <div className="relative min-h-screen bg-app">
             <GradientMesh />
             <FloatingParticles />
             <Glow />
 
-            <header className={`sticky z-20 border-b border-white/10 bg-black/20 backdrop-blur transition-all duration-300 ${
+            <header className={`sticky z-20 border-b border-subtle bg-glass backdrop-blur transition-all duration-300 ${
                 isScrolled 
                     ? "top-4 mx-8 sm:mx-12 rounded-2xl border shadow-lg shadow-black/20" 
                     : "top-0 mx-0 rounded-none"
@@ -72,9 +88,19 @@ export default function Layout() {
                 <Container className={`flex h-16 items-center justify-between transition-all duration-300 ${
                     isScrolled ? "px-6" : ""
                 }`}>
-                    <NavLink to="/" className="font-semibold tracking-tight">
-                        <span className="text-white">Krish Patel</span>
-                    </NavLink>
+                    <div className="flex items-center gap-3">
+                        <NavLink to="/" className="font-semibold tracking-tight text-primary">
+                            Krish Patel
+                        </NavLink>
+                        <button
+                            type="button"
+                            onClick={toggleTheme}
+                            className="rounded-xl border border-subtle bg-surface px-2.5 py-1.5 text-muted-strong hover:text-primary hover:border-strong transition"
+                            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                        >
+                            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                        </button>
+                    </div>
 
                     <nav className="hidden items-center gap-6 sm:flex">
                         {nav.map((n) => (
@@ -84,9 +110,9 @@ export default function Layout() {
                         ))}
                     </nav>
 
-                    <div className="hidden  items-center gap-3">
+                    <div className="hidden items-center gap-3">
                         <a
-                            className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70 hover:text-white hover:border-white/20 transition"
+                            className="rounded-xl border border-subtle bg-surface px-3 py-1.5 text-sm text-muted hover:text-primary hover:border-strong transition"
                             
                         >
                             Message Me
@@ -94,7 +120,7 @@ export default function Layout() {
                     </div>
 
                     <button
-                        className="sm:hidden rounded-xl border border-white/10 bg-white/5 p-2 text-white/80"
+                        className="sm:hidden rounded-xl border border-subtle bg-surface p-2 text-muted-strong"
                         onClick={() => setOpen((v) => !v)}
                         aria-label="Toggle Menu"
                     >
@@ -103,7 +129,7 @@ export default function Layout() {
                 </Container>
 
                 {open && (
-                    <div className={`sm:hidden border-t border-white/10 bg-black/40 backdrop-blur transition-all duration-300 ${
+                    <div className={`sm:hidden border-t border-subtle bg-glass-strong backdrop-blur transition-all duration-300 ${
                         isScrolled ? "rounded-b-2xl" : ""
                     }`}>
                         <Container className={`py-4 flex flex-col gap-3 transition-all duration-300 ${
@@ -114,9 +140,9 @@ export default function Layout() {
                                     {n.label}
                                 </NavItem>
                             ))}
-                            <div className="pt-3 border-t border-white/10 flex gap-3 text-sm">
+                            <div className="pt-3 border-t border-subtle flex gap-3 text-sm">
                                 {socials.map((s) => (
-                                    <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white">
+                                    <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="text-muted hover:text-primary">
                                         {s.label}
                                     </a>
                                 ))}
@@ -130,13 +156,13 @@ export default function Layout() {
                 <Outlet />
             </main>
 
-            <footer className="relative z-10 border-t border-white/10 bg-black/20 backdrop-blur">
+            <footer className="relative z-10 border-t border-subtle bg-glass backdrop-blur">
                 <Container className="py-10">
                     <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                             <div className="mt-2 flex flex-wrap gap-4">
                                 {nav.map((n) => (
-                                    <NavLink key={n.to} to={n.to} className="text-sm text-white/70 hover:text-white">
+                                    <NavLink key={n.to} to={n.to} className="text-sm text-muted hover:text-primary">
                                         {n.label}
                                     </NavLink>
                                 ))}
@@ -146,7 +172,7 @@ export default function Layout() {
                         <div>
                             <div className="mt-2 flex flex-wrap gap-4">
                                 {socials.map((s) => (
-                                    <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="text-sm text-white/70 hover:text-white">
+                                    <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="text-sm text-muted hover:text-primary">
                                         {s.label}
                                     </a>
                                 ))}
@@ -154,7 +180,7 @@ export default function Layout() {
                         </div>
                     </div>
 
-                    <div className="mt-8 text-xs text-white/50">
+                    <div className="mt-8 text-xs text-faint">
                         © {new Date().getFullYear()} Krish Patel. Built with React.
                     </div>
                 </Container>
