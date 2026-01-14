@@ -14,7 +14,7 @@ function ContactCard({ children, initial, animate, transition, href, target, rel
             animate={animate}
             transition={transition}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
-            className="block rounded-2xl border border-white/10 bg-white/5 p-6 hover:border-white/20 transition"
+            className="block rounded-2xl border border-subtle bg-surface p-6 hover:border-strong transition"
             href={href}
             target={target}
             rel={rel}
@@ -66,7 +66,7 @@ export default function Contact() {
                     animate="visible"
                     className="max-w-3xl"
                 >
-                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-muted">
                         Contact
                     </motion.div>
                     <motion.h1
@@ -79,7 +79,7 @@ export default function Contact() {
                     <motion.p
                         variants={itemVariants}
                         {...motionProps}
-                        className="mt-4 text-white/70 leading-7"
+                        className="mt-4 text-muted leading-7"
                     >
                         Best way to reach me is by email. If you've got a clear brief + timeline, even better.
                     </motion.p>
@@ -98,7 +98,7 @@ export default function Contact() {
                         transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
                         href="mailto:krishkp2502@gmail.com"
                     >
-                        <div className="text-sm text-white/70">Email</div>
+                        <div className="text-sm text-muted">Email</div>
                         <div className="mt-2 text-lg font-semibold">krishkp2502@gmail.com</div>
                     </ContactCard>
 
@@ -110,7 +110,7 @@ export default function Contact() {
                         target="_blank"
                         rel="noreferrer"
                     >
-                        <div className="text-sm text-white/70">Book a Meeting</div>
+                        <div className="text-sm text-muted">Book a Meeting</div>
                         <div className="mt-2 text-lg font-semibold">Calendar Link</div>
                     </ContactCard>
                 </motion.div>
