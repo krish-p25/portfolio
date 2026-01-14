@@ -57,7 +57,7 @@ export default function Projects() {
                     animate="visible"
                     className="max-w-3xl"
                 >
-                    <motion.div variants={itemVariants} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} className="text-sm text-muted">
                         My Projects
                     </motion.div>
                     <motion.h1
@@ -68,7 +68,7 @@ export default function Projects() {
                     </motion.h1>
                     <motion.p
                         variants={itemVariants}
-                        className="mt-4 text-white/70 leading-7"
+                        className="mt-4 text-muted leading-7"
                     >
                         A mix of client work and personal products—focused on scalability, performance, and real business outcomes.
                     </motion.p>
