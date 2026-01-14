@@ -15,7 +15,7 @@ function AboutCard({ children, initial, animate, transition }) {
             animate={animate}
             transition={transition}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
-            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+            className="rounded-2xl border border-subtle bg-surface p-6"
         >
             {children}
         </motion.div>
@@ -56,20 +56,20 @@ function TimelineItem({ time, role, org, desc, index }) {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
-            className="rounded-2xl border border-white/10 bg-white/5 p-6"
+            className="rounded-2xl border border-subtle bg-surface p-6"
         >
-            <div className="text-xs text-white/60">{time}</div>
+            <div className="text-xs text-subtle">{time}</div>
             <div className="mt-2 text-base font-semibold">
-                {role} <span className="text-white/60">· {org}</span>
+                {role} <span className="text-subtle">· {org}</span>
             </div>
             {Array.isArray(desc) ? (
-                <ul className="mt-2 text-sm text-white/70 leading-6 list-disc list-inside space-y-1">
+                <ul className="mt-2 text-sm text-muted leading-6 list-disc list-inside space-y-1">
                     {desc.map((item, i) => (
                         <li key={i}>{item}</li>
                     ))}
                 </ul>
             ) : (
-                <p className="mt-2 text-sm text-white/70 leading-6">{desc}</p>
+                <p className="mt-2 text-sm text-muted leading-6">{desc}</p>
             )}
         </motion.div>
     );
@@ -131,7 +131,7 @@ export default function About() {
                     animate="visible"
                     className="max-w-3xl"
                 >
-                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-white/70">
+                    <motion.div variants={itemVariants} {...motionProps} className="text-sm text-muted">
                         About me
                     </motion.div>
                     <motion.h1
@@ -144,7 +144,7 @@ export default function About() {
                     <motion.p
                         variants={itemVariants}
                         {...motionProps}
-                        className="mt-4 text-white/70 leading-7"
+                        className="mt-4 text-muted leading-7"
                     >
                         When crafting, I focus on the value my code is adding to the world.
                     </motion.p>
@@ -155,13 +155,13 @@ export default function About() {
                         className="mt-6 flex flex-wrap gap-3"
                     >
                         <a
-                            className="rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm hover:bg-white/15 transition"
+                            className="rounded-2xl border border-soft bg-surface-strong px-5 py-2.5 text-sm text-primary hover:bg-surface-hover transition"
                             href="https://docs.google.com/document/d/12ylnVndoXySm5J00QHB1obrKkcNP46ALWHSVS0aoxsU/edit?usp=sharing"
                         >
                             My CV
                         </a>
                         <a
-                            className="rounded-2xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm text-white/80 hover:text-white hover:border-white/20 transition"
+                            className="rounded-2xl border border-subtle bg-surface px-5 py-2.5 text-sm text-muted-strong hover:text-primary hover:border-strong transition"
                             href="https://portfolio.krishrp.xyz/projects"
                         >
                             My Projects
@@ -181,7 +181,7 @@ export default function About() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <div className="text-sm text-white/70">Core Stack</div>
+                        <div className="text-sm text-muted">Core Stack</div>
                         <div className="mt-3 flex flex-wrap gap-2">
                             {coreStack.map((x, i) => (
                                 <motion.span
@@ -191,14 +191,14 @@ export default function About() {
                                     animate="visible"
                                     variants={tagVariants}
                                     style={{ willChange: 'opacity, transform' }}
-                                    className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-white/70"
+                                    className="rounded-full border border-subtle bg-chip px-3 py-1 text-xs text-muted"
                                 >
                                     {x}
                                 </motion.span>
                             ))}
                         </div>
 
-                        <p className="mt-4 text-sm text-white/70 leading-6">
+                        <p className="mt-4 text-sm text-muted leading-6">
                             I care about performance, reliability, and UX polish. If it's not crisp, it's not done.
                         </p>
                     </AboutCard>
@@ -208,9 +208,9 @@ export default function About() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <div className="text-sm text-white/70">Now</div>
+                        <div className="text-sm text-muted">Now</div>
                         <h2 className="mt-2 text-2xl font-semibold">Building + Iterating</h2>
-                        <p className="mt-3 text-sm text-white/70 leading-6">
+                        <p className="mt-3 text-sm text-muted leading-6">
                             Currently focused on shipping B2B tools, improving conversion, and scaling infra without any drawbacks.
                         </p>
                     </AboutCard>
