@@ -3,8 +3,9 @@ import Container from "../components/Container.jsx";
 import Pill from "../components/Pill.jsx";
 import ProjectCard from "../components/ProjectCard.jsx";
 import { projects } from "../data/projects.js";
-// eslint-disable-next-line no-unused-vars
+//eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import { containerVariants, itemVariants, EASE_CURVE } from "../constants/animations.js";
 
 export default function Projects() {
     const allTags = useMemo(() => {
@@ -19,29 +20,6 @@ export default function Projects() {
         if (active === "All") return projects;
         return projects.filter((p) => p.tags.includes(active));
     }, [active]);
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.1,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-            },
-        },
-    };
 
     return (
         <motion.div
@@ -85,7 +63,7 @@ export default function Projects() {
                             key={t}
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.3, delay: 0.5 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                            transition={{ duration: 0.3, delay: 0.5 + i * 0.05, ease: EASE_CURVE }}
                             style={{ willChange: 'opacity, transform' }}
                         >
                             <Pill active={t === active} onClick={() => setActive(t)}>
@@ -113,10 +91,10 @@ function AnimatedProjectCard({ project, index }) {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ 
-                duration: 0.5, 
+            transition={{
+                duration: 0.5,
                 delay: index * 0.1,
-                ease: [0.22, 1, 0.36, 1]
+                ease: EASE_CURVE
             }}
             style={{ willChange: 'opacity, transform' }}
             className="h-full"

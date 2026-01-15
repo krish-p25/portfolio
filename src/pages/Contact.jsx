@@ -2,6 +2,12 @@ import Container from "../components/Container.jsx";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import useTiltEffect from "../hooks/useTiltEffect.js";
+import {
+    containerVariants,
+    itemVariants,
+    motionProps,
+    EASE_CURVE
+} from "../constants/animations.js";
 
 function ContactCard({ children, initial, animate, transition, href, target, rel }) {
     const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
@@ -25,33 +31,6 @@ function ContactCard({ children, initial, animate, transition, href, target, rel
 }
 
 export default function Contact() {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.1,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-            },
-        },
-    };
-    
-    const motionProps = {
-        style: { willChange: 'opacity, transform' }
-    };
-
     return (
         <motion.div
             className="relative"
@@ -88,14 +67,14 @@ export default function Contact() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: EASE_CURVE }}
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2"
                 >
                     <ContactCard
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.5, delay: 0.5, ease: EASE_CURVE }}
                         href="mailto:krishkp2502@gmail.com"
                     >
                         <div className="text-sm text-muted">Email</div>
@@ -105,7 +84,7 @@ export default function Contact() {
                     <ContactCard
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.5, delay: 0.6, ease: EASE_CURVE }}
                         href="https://cal.com/krish-p-hwfjhs"
                         target="_blank"
                         rel="noreferrer"

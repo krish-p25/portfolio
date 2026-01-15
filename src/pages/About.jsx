@@ -3,6 +3,13 @@ import Container from "../components/Container.jsx";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import useTiltEffect from "../hooks/useTiltEffect.js";
+import {
+    containerVariants,
+    itemVariants,
+    tagVariants,
+    motionProps,
+    EASE_CURVE
+} from "../constants/animations.js";
 
 function AboutCard({ children, initial, animate, transition }) {
     const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
@@ -31,7 +38,7 @@ function TimelineHeading() {
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, ease: EASE_CURVE }}
             style={{ willChange: 'opacity, transform' }}
             className="mt-12 text-2xl font-semibold"
         >
@@ -54,7 +61,7 @@ function TimelineItem({ time, role, org, desc, index }) {
             {...handlers}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: index * 0.1, ease: EASE_CURVE }}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
             className="rounded-2xl border border-subtle bg-surface p-6"
         >
@@ -76,45 +83,6 @@ function TimelineItem({ time, role, org, desc, index }) {
 }
 
 export default function About() {
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.1,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-            },
-        },
-    };
-    
-    const motionProps = {
-        style: { willChange: 'opacity, transform' }
-    };
-
-    const tagVariants = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: (i) => ({
-            opacity: 1,
-            scale: 1,
-            transition: {
-                delay: i * 0.05,
-                duration: 0.3,
-            },
-        }),
-    };
-
     const coreStack = ["React", "NodeJS", "ExpressJS", "PostgreSQL", "AWS", "CloudFlare"];
 
     return (
@@ -172,14 +140,14 @@ export default function About() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: EASE_CURVE }}
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-2"
                 >
                     <AboutCard
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.5, delay: 0.5, ease: EASE_CURVE }}
                     >
                         <div className="text-sm text-muted">Core Stack</div>
                         <div className="mt-3 flex flex-wrap gap-2">
@@ -206,7 +174,7 @@ export default function About() {
                     <AboutCard
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.5, delay: 0.6, ease: EASE_CURVE }}
                     >
                         <div className="text-sm text-muted">Now</div>
                         <h2 className="mt-2 text-2xl font-semibold">Building + Iterating</h2>

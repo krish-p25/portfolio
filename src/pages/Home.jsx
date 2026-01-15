@@ -1,10 +1,17 @@
 import Container from "../components/Container.jsx";
 import { Link } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line
 import { motion } from "framer-motion";
 import { projects } from "../data/projects.js";
 import { useEffect, useState, useMemo } from "react";
 import useTiltEffect from "../hooks/useTiltEffect.js";
+import {
+    containerVariants,
+    itemVariants,
+    tagVariants,
+    motionProps,
+    EASE_CURVE
+} from "../constants/animations.js";
 
 function FeatureCard({ children, initial, animate, transition }) {
     const { ref, tiltStyles, handlers } = useTiltEffect({ scale: 1.02, maxTilt: 6 });
@@ -89,7 +96,7 @@ function Stat({ value, label, delay = 0 }) {
             {...handlers}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: delay, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: delay, ease: EASE_CURVE }}
             style={{ ...tiltStyles, willChange: 'opacity, transform' }}
             className="rounded-2xl border border-subtle bg-surface p-5"
         >
@@ -129,13 +136,13 @@ export default function Home() {
         let frameId;
         let lastTime = performance.now();
         let waitTimeout;
-        
+
         const animate = (currentTime) => {
             const delta = currentTime - lastTime;
-            
+
             if (delta >= typingSpeed) {
                 lastTime = currentTime;
-                
+
                 if (!isDeleting) {
                     // Typing forward
                     if (charIndex < currentTranslation.length) {
@@ -165,9 +172,9 @@ export default function Home() {
                 frameId = requestAnimationFrame(animate);
             }
         };
-        
+
         frameId = requestAnimationFrame(animate);
-        
+
         return () => {
             if (frameId) {
                 cancelAnimationFrame(frameId);
@@ -177,45 +184,6 @@ export default function Home() {
             }
         };
     }, [charIndex, currentIndex, isDeleting, translations]);
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.15,
-                delayChildren: 0.1,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-            },
-        },
-    };
-    
-    const motionProps = {
-        style: { willChange: 'opacity, transform' }
-    };
-
-    const tagVariants = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: (i) => ({
-            opacity: 1,
-            scale: 1,
-            transition: {
-                delay: i * 0.05,
-                duration: 0.3,
-            },
-        }),
-    };
 
     const uniqueTags = [...new Set(projects.flatMap(project => project.tags))].sort();
 
@@ -280,7 +248,7 @@ export default function Home() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.6, delay: 0.4, ease: EASE_CURVE }}
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3"
                 >
@@ -292,14 +260,14 @@ export default function Home() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.6, delay: 0.6, ease: EASE_CURVE }}
                     style={{ willChange: 'opacity, transform' }}
                     className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2"
                 >
                     <FeatureCard
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.5, delay: 0.8, ease: EASE_CURVE }}
                     >
                         <div className="text-sm text-muted">Focusing on the best</div>
                         <h2 className="mt-2 text-2xl font-semibold">Multiple Tech Stack</h2>
@@ -327,7 +295,7 @@ export default function Home() {
                     <FeatureCard
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ duration: 0.5, delay: 0.9, ease: EASE_CURVE }}
                     >
                         <h2 className="text-2xl font-semibold">Open to collaborations</h2>
                         <p className="mt-3 text-sm text-muted leading-6">
