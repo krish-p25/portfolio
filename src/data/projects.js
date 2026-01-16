@@ -155,7 +155,6 @@ export const projects = [
     {
         title: "Barcode Printer",
         description: "A barcode printer built to replace paid Shopify Apps. Allows Shopify store owners to print barcodes for their products with a custom template upload. Has intelligent template selection, based on slash pricing, price ranges and more.",
-        link: "https://github.com/krish-p25/barcode-printer",
         tags: [
             "HTML5",
             "CSS3",
