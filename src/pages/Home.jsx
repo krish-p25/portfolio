@@ -253,8 +253,8 @@ export default function Home() {
                     className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3"
                 >
                     <Stat value="£10,622,113+" label="Revenue Generated from my projects" delay={0.5} />
-                    <Stat value="4" label="Businesses Scaled and Managed" delay={0.5} />
-                    <Stat value="3+" label="Years Crafting Solutions" delay={0.5} />
+                    <Stat value="3" label="Start-ups Scaled" delay={0.5} />
+                    <Stat value="4+" label="Years Crafting Solutions" delay={0.5} />
                 </motion.div>
 
                 <motion.div
