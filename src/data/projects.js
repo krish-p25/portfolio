@@ -77,7 +77,7 @@ export const projects = [
     {
         title: "Stashed Media Collection Tool",
         description: "A tool for collecting media from various sources and storing them in a database. With option for either Google Drive or AWS S3 storage.",
-        link: "https://stashed.krishrp.xyz/how-it-works",
+        link: "https://stashedmedia.krishrp.xyz/",
         tags: [
             "ReactJS",
             "TailwindCSS",
