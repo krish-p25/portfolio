@@ -2,7 +2,7 @@ export const projects = [
     {
         title: "B2B Consignment Platform",
         description: "A platform for handling consignment orders and managing inventory. Developed and scaled to 400+ users, processing £10k+ in sales daily.",
-        link: "https://sell.crepslocker.com/",
+        // link: "https://sell.crepslocker.com/",
         tags: [
             "HTML5",
             "CSS3",
@@ -43,7 +43,7 @@ export const projects = [
     {
         title: "Aurora GUI",
         description: "Desktop application helping small business owners manage inventory and tracking of orders.",
-        link: "https://github.com/krish-p25/aurora-gui",
+        // link: "https://github.com/krish-p25/aurora-gui",
         tags: [
             "ElectronJS",
             "HTML5",
@@ -77,7 +77,7 @@ export const projects = [
     {
         title: "Stashed Media Collection Tool",
         description: "A tool for collecting media from various sources and storing them in a database. With option for either Google Drive or AWS S3 storage.",
-        link: "https://stashedmedia.krishrp.xyz/",
+        // link: "https://stashedmedia.krishrp.xyz/",
         tags: [
             "ReactJS",
             "TailwindCSS",
@@ -110,7 +110,7 @@ export const projects = [
     {
         title: "VR Driving Safety Simulator",
         description: "A VR driving safety simulator that helps users learn how to drive safely and avoid accidents. Simulation is conducted in a virtual environment with results then displayed in a dashboard.",
-        link: "https://www.ucl-intelligent-mobility.com/",
+        // link: "https://www.ucl-intelligent-mobility.com/",
         tags: [
             "HTML5",
             "CSS3",
@@ -126,7 +126,7 @@ export const projects = [
     {
         title: "This Portfolio",
         description: "A portfolio website built with React and TailwindCSS. It is a simple website that displays my projects and my skills.",
-        link: "https://krishrp.xyz/",
+        // link: "https://krishrp.xyz/",
         tags: [
             "ReactJS",
             "TailwindCSS",
@@ -142,7 +142,7 @@ export const projects = [
     {
         title: "Invoice Generator",
         description: "An advanced invoice generator built with React and TailwindCSS. Full customisation of invoice with drag and drop functionality and bulk invoice generation.",
-        link: "https://github.com/krish-p25/invoice-generator",
+        // link: "https://github.com/krish-p25/invoice-generator",
         tags: [
             "ReactJS",
             "TailwindCSS",
