@@ -17,7 +17,7 @@ export default function LoadingScreen({ isLoading }) {
     <div
       className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#06060e] transition-all duration-[800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
         phase === "exiting"
-          ? "opacity-0 scale-[1.02]"
+          ? "opacity-0 scale-[1.02] pointer-events-none"
           : "opacity-100 scale-100"
       }`}
     >
