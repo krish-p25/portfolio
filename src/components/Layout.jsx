@@ -1,10 +1,10 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import Container from "./Container.jsx";
-import GradientMesh from "./GradientMesh.jsx";
-import FloatingParticles from "./FloatingParticles.jsx";
+import CloudFieldBackground from "./CloudFieldBackground.jsx";
 import Glow from "./Glow.jsx";
+import LoadingScreen from "./LoadingScreen.jsx";
 
 const nav = [
     { to: "/", label: "Home" },
@@ -33,6 +33,18 @@ function NavItem({ to, children, onClick }) {
 export default function Layout() {
     const [open, setOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [bgReady, setBgReady] = useState(false);
+    const [minTimeElapsed, setMinTimeElapsed] = useState(false);
+
+    const isLoading = !bgReady || !minTimeElapsed;
+
+    useEffect(() => {
+        const timer = setTimeout(() => setMinTimeElapsed(true), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const handleBgReady = useCallback(() => setBgReady(true), []);
+
     const [theme, setTheme] = useState(() => {
         if (typeof window === "undefined") return "dark";
         const storedTheme = localStorage.getItem("theme");
@@ -76,8 +88,8 @@ export default function Layout() {
 
     return (
         <div className="relative min-h-screen bg-app flex flex-col">
-            <GradientMesh />
-            <FloatingParticles />
+            <LoadingScreen isLoading={isLoading} />
+            <CloudFieldBackground onReady={handleBgReady} />
             <Glow />
 
             <header className={`sticky z-20 border-b border-subtle bg-glass backdrop-blur transition-all duration-300 relative ${

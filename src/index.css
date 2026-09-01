@@ -225,6 +225,102 @@ html {
   }
 }
 
+/* Cloud field background - hide in light mode */
+[data-theme="light"] .cloud-field-canvas {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* ── Loading Screen Animations ── */
+
+@keyframes loadingRingDraw {
+  0% { stroke-dashoffset: 327; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes loadingRingRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loadingDashSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes loadingMonogramIn {
+  0% { opacity: 0; transform: scale(0.8); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes loadingOrbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes loadingProgress {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes loadingTextIn {
+  0% { opacity: 0; letter-spacing: 0.6em; }
+  100% { opacity: 1; letter-spacing: 0.3em; }
+}
+
+@keyframes loadingParticle {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+  50% { opacity: 1; transform: translateY(-20px) scale(1.5); }
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.loading-ring-circle {
+  animation: loadingRingDraw 2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             loadingRingRotate 8s linear 1.5s infinite;
+  transform-origin: center;
+}
+
+.loading-ring {
+  animation: loadingRingRotate 12s linear infinite;
+}
+
+.loading-ring-inner {
+  animation: none;
+}
+
+.loading-ring-dashes {
+  animation: loadingDashSpin 20s linear infinite;
+  transform-origin: center;
+}
+
+.loading-monogram {
+  animation: loadingMonogramIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+}
+
+.loading-orbit {
+  animation: loadingOrbit 3s linear infinite;
+}
+
+.loading-progress {
+  animation: loadingProgress 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.loading-text {
+  animation: loadingTextIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+}
+
+.loading-particle {
+  animation: loadingParticle 4s ease-in-out infinite;
+}
+
+.loading-pulse {
+  animation: loadingPulse 4s ease-in-out infinite;
+}
+
 /* Disable animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
